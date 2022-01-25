@@ -1,13 +1,7 @@
-name: sentrylab build sync and reload.
+name: build sync and reload.
 
 on:
   [workflow_dispatch]
-
-#    push:
-#       branches:
-#         - main
-#    paths: ['_posts/*']
-#    workflow_dispatch 似乎不允许存在:-）
 
 jobs:
   build:
@@ -30,53 +24,68 @@ jobs:
         CACHE_ID: 1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('Gemfile') }}
+        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
         restore-keys: |
           ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
-    - name: Change rubygems loading
-      run: sed -i "/^source/c source 'https://rubygems.org'" Gemfile
-    # --path=vendor/bundle
+#    - name: Change rubygems loading
+#      run: sed -i "/^source/c source 'https://rubygems.org'" Gemfile
+#     --path=vendor/bundle
     - name: install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: bundle install --path=vendor/bundle --jobs=4 --retry=3
-    - name: setup commit hash string
       run: |
+        export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
+        bundle install --path=vendor/bundle --jobs=4 --retry=3
         commitString=$(git rev-parse HEAD)
         echo $commitString
         echo "commitString: $commitString" >> _config.yml
     # bundle config set --local path 'vendor/bundle' && 
     - name: run jekyll-build
       run: |
+        cd $work_dir
         bundle config set --local path 'vendor/bundle'
         bundle exec jekyll build --trace
-    - name: simple deploy with git
-      uses: rdarida/simple-github-pages-deploy-action@v1
-      with: # optional
-        git-user: ${{ secrets.Git_USERNAME }}
-        git-email: ${{ secrets.Git_EMAIL }}
-        git-base-folder: '_site'
-        commit-message: '<auto generate>: page build/deploy by github action.'
-        branch: 'gh-pages'
-  # sync start
-  sync:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: sync to Gitee
-      uses: wearerequired/git-mirror-action@master
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+    # 上传打包文件到远程服务器
+    - name: sync
+      uses: zhenyuWang/Upload-File-Action@v1.0.1
       with:
-        source-repo: "git@github.com:Bin4xin/bin4xin.github.io.git"
-        destination-repo: "git@gitee.com:bin4xin/bin4xin.git"
-  gitee-check-rebuild:
-    needs: sync
-    runs-on: ubuntu-latest
-    steps:
-    - name: build Gitee Pages
-      uses: yanglbme/gitee-pages-action@main
-      with:
-        gitee-username: bin4xin
-        gitee-password: ${{ secrets.GITEE_PASSWORD }}
-        gitee-repo: bin4xin/bin4xin
-        branch: gh-pages
+        username: "root"
+        server: "1.117.209.90"
+        port: "22"
+        ssh_private_key: ${{ secrets.私钥 }}
+        # 要上传文件所在目录
+        local_path: "./dist/*"
+        # 远程服务器目标路径
+        target_path: "/usr/local/nginx/html/xxx"
+
+#    - name: simple deploy with git
+#      uses: rdarida/simple-github-pages-deploy-action@v1
+#      with: # optional
+#        git-user: ${{ secrets.Git_USERNAME }}
+#        git-email: ${{ secrets.Git_EMAIL }}
+#        git-base-folder: '_site'
+#        commit-message: '<auto generate>: page build/deploy by github action.'
+#        branch: 'gh-pages'
+# sync start
+#  sync:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: sync to Gitee
+#      uses: wearerequired/git-mirror-action@master
+#      env:
+#        SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+#      with:
+#        source-repo: "git@github.com:Bin4xin/bin4xin.github.io.git"
+#        destination-repo: "git@gitee.com:bin4xin/bin4xin.git"
+
+#  gitee-check-rebuild:
+#    needs: sync
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: build Gitee Pages
+#      uses: yanglbme/gitee-pages-action@main
+#      with:
+#        gitee-username: bin4xin
+#        gitee-password: ${{ secrets.GITEE_PASSWORD }}
+#        gitee-repo: bin4xin/bin4xin
+#        branch: gh-pages
