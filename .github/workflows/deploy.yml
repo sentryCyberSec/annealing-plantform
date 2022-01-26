@@ -27,7 +27,7 @@ jobs:
         key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
         restore-keys: |
           ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
-    - name: install dependencies
+    - name: install dependencies & build
 #      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
@@ -36,8 +36,6 @@ jobs:
         echo $commitString
         echo "commitString: $commitString" >> _config.yml
         pwd && ls -la /tmp
-    - name: run jekyll-build
-      run: |
         cd $work_dir && pwd
         ls -la
         bundle config set --local path '/tmp/bundle'
