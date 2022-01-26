@@ -23,25 +23,23 @@ jobs:
       env:
         CACHE_ID: 1
       with:
-        path: vendor/bundle
+        path: /tmp/bundle
         key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
         restore-keys: |
           ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
-#    - name: Change rubygems loading
-#      run: sed -i "/^source/c source 'https://rubygems.org'" Gemfile
-#     --path=vendor/bundle
     - name: install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+#      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
-        bundle install --path=vendor/bundle --jobs=4 --retry=3
+        bundle install --path=/tmp/bundle --jobs=4 --retry=3
         commitString=$(git rev-parse HEAD)
         echo $commitString
         echo "commitString: $commitString" >> _config.yml
-    # bundle config set --local path 'vendor/bundle' && 
+        pwd && ls -la /tmp
     - name: run jekyll-build
       run: |
-        cd $work_dir
+        cd $work_dir && pwd
+        ls -la
         bundle config set --local path 'vendor/bundle'
         bundle exec jekyll build --trace
     # 上传打包文件到远程服务器
