@@ -45,47 +45,13 @@ jobs:
         bundle config set --local path 'vendor/bundle'
         bundle exec jekyll build --trace
     # 上传打包文件到远程服务器
-    - name: sync
-      uses: zhenyuWang/Upload-File-Action@v1.0.1
+    - name: Push
+      uses: yeshan333/rsync-deploy-action@v1.0.0
       with:
-        username: "root"
-        server: "1.117.209.90"
-        port: "22"
-        ssh_private_key: ${{ secrets.私钥 }}
-        # 要上传文件所在目录
-        local_path: "./dist/*"
-        # 远程服务器目标路径
-        target_path: "/usr/local/nginx/html/xxx"
-
-#    - name: simple deploy with git
-#      uses: rdarida/simple-github-pages-deploy-action@v1
-#      with: # optional
-#        git-user: ${{ secrets.Git_USERNAME }}
-#        git-email: ${{ secrets.Git_EMAIL }}
-#        git-base-folder: '_site'
-#        commit-message: '<auto generate>: page build/deploy by github action.'
-#        branch: 'gh-pages'
-# sync start
-#  sync:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: sync to Gitee
-#      uses: wearerequired/git-mirror-action@master
-#      env:
-#        SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-#      with:
-#        source-repo: "git@github.com:Bin4xin/bin4xin.github.io.git"
-#        destination-repo: "git@gitee.com:bin4xin/bin4xin.git"
-
-#  gitee-check-rebuild:
-#    needs: sync
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: build Gitee Pages
-#      uses: yanglbme/gitee-pages-action@main
-#      with:
-#        gitee-username: bin4xin
-#        gitee-password: ${{ secrets.GITEE_PASSWORD }}
-#        gitee-repo: bin4xin/bin4xin
-#        branch: gh-pages
+        ssh_login_username: github
+        remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
+        ssh_port: 22
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source_path: ./anhui-telecom-ecdepartment/_site/*
+        destination_path: ~/www/anhui-telecom-ecdepartment/
+        rsync_args: --exclude="./anhui-telecom-ecdepartment/_site/Gemfile.lock"
