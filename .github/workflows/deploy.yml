@@ -40,7 +40,7 @@ jobs:
       run: |
         cd $work_dir && pwd
         ls -la
-        bundle config set --local path 'vendor/bundle'
+        bundle config set --local path '/tmp/bundle'
         bundle exec jekyll build --trace
     # 上传打包文件到远程服务器
     - name: Push
