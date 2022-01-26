@@ -5,7 +5,7 @@ title: © 哨兵
 brand: Sentry CyberSecurity
 description: 哨兵安全实验室
 baseurl: "" #important: start with /
-url: "http://localhost"
+url: "http://audit.isisy.com"
 
 highlighter: rouge
 markdown: kramdown
