@@ -1,7 +1,9 @@
 name: build sync and reload.
 
 on:
-  [workflow_dispatch]
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -28,7 +30,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
     - name: install dependencies & build
-#      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
         bundle install --path=/tmp/bundle --jobs=4 --retry=3
