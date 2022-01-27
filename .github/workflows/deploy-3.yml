@@ -33,13 +33,14 @@ jobs:
       - name: install dependencies & build
         run: |
           mkdir ${{ env.project }}
-          cp -R anhui-telecom-ecdepartment/* ${{ env.project }}/
+          cp -R anhui-telecom-ecdepartment/* ${{ env.project }}
           export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
+          pwd && ls -la
           bundle install --path=/tmp/bundle --jobs=4 --retry=3
           commitString=$(git rev-parse HEAD)
           echo "commitString: $commitString" >> _config.yml
           bundle config set --local path '/tmp/bundle'
-          grep -rl 'anhui-telecom-ecdepartment'  ./ |xargs sed -i "" "s/anhui-telecom-ecdepartment/${{ env.project }}/g"
+          grep -rl 'anhui-telecom-ecdepartment'  . |xargs sed -i "" "s/anhui-telecom-ecdepartment/${{ env.project }}/g"
           mv _posts/anhui-telecom-ecdepartment _posts/${{ env.project }}
           mv _layouts/anhui-telecom-ecdepartment.html _layouts/${{ env.project }}.html
           bundle exec jekyll build --trace
