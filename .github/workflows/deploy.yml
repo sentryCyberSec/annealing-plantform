@@ -1,62 +1,51 @@
-name: Build Sync and Push.
+name: build sync and reload.
 
 on:
   push:
     branches:
       - main
-env:
-  project: "anhui-telecom-ecdepartment"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       LSI: 'true'
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0    
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6
-    - name: cache Ruby Bundler
-      id: cache
-      uses: actions/cache@v2
-      env:
-        CACHE_ID: 1
-      with:
-        path: /tmp/bundle
-        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('${{ env.project }}/Gemfile') }}
-        restore-keys: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
-    - name: install dependencies & build
-      run: |
-        echo ${{ env.project }}
-        export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
-        bundle install --path=/tmp/bundle --jobs=4 --retry=3
-        commitString=$(git rev-parse HEAD)
-        echo $commitString
-        echo "commitString: $commitString" >> _config.yml
-#        pwd && ls -la /tmp
-#        cd $work_dir && pwd
-#        ls -la
-        bundle config set --local path '/tmp/bundle'
-        bundle exec jekyll build --trace
-#      run to get all version.
-#        go get?
-#        find $work_dir/www/frp/ -name '*.zip' -exec unzip {} \;
-#        unzip all windows version zip files.
-#        ?
-#        bash scripts/SCS_domail_mail_manage.sh
-#        set password for frp clents.
-#   上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
-    - name: Push
-      uses: yeshan333/rsync-deploy-action@v1.0.0
-      with:
-        ssh_login_username: github
-        remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
-        ssh_port: 22
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source_path: ./${{ env.project }}/_site/*
-        destination_path: ~/www/${{ env.project }}/
-        rsync_args: --exclude="./${{ env.project }}/_site/Gemfile.lock"
+      - name: set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - name: cache Ruby Bundler
+        id: cache
+        uses: actions/cache@v2
+        env:
+          CACHE_ID: 1
+        with:
+          path: /tmp/bundle
+          key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
+      - name: install dependencies & build
+        run: |
+          export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
+          bundle install --path=/tmp/bundle --jobs=4 --retry=3
+          commitString=$(git rev-parse HEAD)
+          echo $commitString
+          echo "commitString: $commitString" >> _config.yml
+          bundle config set --local path '/tmp/bundle'
+          bundle exec jekyll build --trace
+      # 上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
+      - name: Push
+        uses: yeshan333/rsync-deploy-action@v1.0.0
+        with:
+          ssh_login_username: github
+          remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
+          ssh_port: 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source_path: ./anhui-telecom-ecdepartment/_site/*
+          destination_path: ~/www/anhui-telecom-ecdepartment/
+          rsync_args: --exclude="./anhui-telecom-ecdepartment/_site/Gemfile.lock"
