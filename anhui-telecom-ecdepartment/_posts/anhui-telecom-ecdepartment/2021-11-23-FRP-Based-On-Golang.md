@@ -7,8 +7,10 @@ author: Bin4xin
 permalink: /FRP/
 windows-link: ["www/frp/frp-windows-x64.zip", "www/frp/frp-windows-x32.zip"]
 others-link: ["www/frp/frp-amd64.tar.gz", "www/frp/frp-i386.tar.gz"]
+toc: true
 ---
 
+# FRP Based On Golang
 <!-- 用一段话简单描述一下功能、用途 -->
 
 > frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS等多种协议。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。
@@ -24,8 +26,13 @@ others-link: ["www/frp/frp-amd64.tar.gz", "www/frp/frp-i386.tar.gz"]
 - 服务端和客户端 UI 页面。
 
 
-### Q&A
+### Q & A
 
 - [怎么远程关闭FRPC端？ #2391](https://github.com/fatedier/frp/issues/2391)
 	- 可以通过将 frpc 的 admin 界面通过 frps 代理出来，然后通过这个代理的界面来操作 frpc。这样这个需求就变成 frpc 的管理界面提供一个关闭自身的方法
 
+> 后续会推出更多兼容版本，因为暂时还没有想好Github二进制文件同步策略；也欢迎仓库共享代码:)
+
+### 仓库
+
+<h4><a href="{{site.githubAccess}}/{{site.githubCodeRepos}}" target="_blank"> <em><li class="fa fa-github"></li> Contribute Pull Request</em></a></h4>

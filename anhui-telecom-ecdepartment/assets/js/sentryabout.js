@@ -16,14 +16,14 @@ $(function () {
 	});
 });
 $(".article-index").sticky({
-	topSpacing: 10,
+	topSpacing: 88,
 });
 
 $(document).scroll(function(){
 
-/* class: article-index :page.toc
- * while window scroll to buttom then disappear; else display article's toc;
- */
+	/* class: article-index :page.toc
+     * while window scroll to buttom then disappear; else display article's toc;
+     */
 	const nav = $(".article-index");
 	if ( $(document).scrollTop() * 1.18 > $(document).height()) {
 		/*addclass to remove sticky article index*/
