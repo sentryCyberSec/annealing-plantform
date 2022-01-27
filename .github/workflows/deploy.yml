@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  project: anhui-telecom-ecdepartment
+  project: "anhui-telecom-ecdepartment"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,11 +27,11 @@ jobs:
         CACHE_ID: 1
       with:
         path: /tmp/bundle
-        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('.gitignore') }}
-        restore-keys: |
-          ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
+        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('${{ env.project }}/Gemfile') }}
+        restore-keys: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
     - name: install dependencies & build
       run: |
+        echo ${{ env.project }}
         export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
         bundle install --path=/tmp/bundle --jobs=4 --retry=3
         commitString=$(git rev-parse HEAD)
