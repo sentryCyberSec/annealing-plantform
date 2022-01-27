@@ -40,7 +40,7 @@ jobs:
           commitString=$(git rev-parse HEAD)
           echo "commitString: $commitString" >> _config.yml
           bundle config set --local path '/tmp/bundle'
-          grep -rl 'anhui-telecom-ecdepartment'  . |xargs sed -i "" "s/anhui-telecom-ecdepartment/${{ env.project }}/g"
+          sed -i "s/anhui-telecom-ecdepartment/${{ env.project }}/g"  `grep anhui-telecom-ecdepartment -rl .`
           mv _posts/anhui-telecom-ecdepartment _posts/${{ env.project }}
           mv _layouts/anhui-telecom-ecdepartment.html _layouts/${{ env.project }}.html
           bundle exec jekyll build --trace
