@@ -73,7 +73,7 @@ layout: default
 										<p>终端运行如下命令以下载:</p>
 									</h4>
 									{% for links in page.windows-link %}
-									<pre><code><span id="cli"><span class="token prompt" id="text1">$ </span>wget {{site.url}}/{{links}} --user={{site.anhui-telecom-ecdepartment}} --password=[passwd]</span></code></pre>
+									<pre><code><span id="cli"><span class="token prompt" id="text1">$ </span>wget {{site.url}}/{{links}} --user={{site.project}} --password=[passwd]</span></code></pre>
 									{% endfor %}
 									<p></p>
 								</div>
@@ -86,10 +86,10 @@ layout: default
 										<p>终端运行如下命令以下载:</p>
 									</h4>
 									{% for links in page.others-link %}
-									<pre><code><span><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/{{links}} -u "{{site.anhui-telecom-ecdepartment}}:[passwd]"</span></code></pre>
+									<pre><code><span><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/{{links}} -u "{{site.project}}:[passwd]"</span></code></pre>
 									{% endfor %}
-									<p><sub><a href="https://snapcraft.io">Snap is available on other Linux OS’s as well</a>.
-									</sub></p>
+<!--									<p><sub><a href="https://snapcraft.io">Snap is available on other Linux OS’s as well</a>.-->
+<!--									</sub></p>-->
 								</div>
 							</div><!-- /download-wrap end -->
 						</div>

@@ -1,11 +1,11 @@
-name: build sync and reload.
+name: build-2 sync and reload.
 
 on:
   push:
     branches:
       - main
 env:
-  project: "anhui-telecom-ecdepartment"
+  project: "jiangsu-telecom-cybersecdepartment"
   CACHE_ID: 1
 
 jobs:
@@ -32,11 +32,16 @@ jobs:
             ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
       - name: install dependencies & build
         run: |
+          mkdir ${{ env.project }}
+          cp -R anhui-telecom-ecdepartment/* ${{ env.project }}/
           export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
           bundle install --path=/tmp/bundle --jobs=4 --retry=3
           commitString=$(git rev-parse HEAD)
           echo "commitString: $commitString" >> _config.yml
           bundle config set --local path '/tmp/bundle'
+          grep -rl 'anhui-telecom-ecdepartment'  ./ |xargs sed -i "" "s/anhui-telecom-ecdepartment/${{ env.project }}/g"
+          mv _posts/anhui-telecom-ecdepartment _posts/${{ env.project }}
+          mv _layouts/anhui-telecom-ecdepartment.html _layouts/${{ env.project }}.html
           bundle exec jekyll build --trace
       # 上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
       - name: Push

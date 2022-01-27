@@ -6962,6 +6962,7 @@ button.close {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
 * {
