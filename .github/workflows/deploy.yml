@@ -27,7 +27,7 @@ jobs:
         CACHE_ID: 1
       with:
         path: /tmp/bundle
-        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('${{ env.project }}/Gemfile') }}
+        key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('.gitignore') }}
         restore-keys: |
           ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
     - name: install dependencies & build
