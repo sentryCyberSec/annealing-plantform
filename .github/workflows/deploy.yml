@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+env:
+  project: "anhui-telecom-ecdepartment"
+  CACHE_ID: 1
 
 jobs:
   build:
@@ -22,16 +25,14 @@ jobs:
       - name: cache Ruby Bundler
         id: cache
         uses: actions/cache@v2
-        env:
-          CACHE_ID: 1
         with:
           path: /tmp/bundle
-          key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
+          key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('${{ env.project }}/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
       - name: install dependencies & build
         run: |
-          export work_dir="`pwd`/anhui-telecom-ecdepartment" && cd $work_dir
+          export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
           bundle install --path=/tmp/bundle --jobs=4 --retry=3
           commitString=$(git rev-parse HEAD)
           echo $commitString
@@ -46,6 +47,6 @@ jobs:
           remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
           ssh_port: 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source_path: ./anhui-telecom-ecdepartment/_site/*
-          destination_path: ~/www/anhui-telecom-ecdepartment/
-          rsync_args: --exclude="./anhui-telecom-ecdepartment/_site/Gemfile.lock"
+          source_path: ./${{ env.project }}/_site/*
+          destination_path: ~/www/${{ env.project }}/
+          rsync_args: --exclude="./${{ env.project }}/_site/Gemfile.lock"
