@@ -3182,6 +3182,16 @@ select[multiple].input-lg {
     font-size: 12px;
   }
 }
+.content p {
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.5em 0;
+  font-weight: 400;
+  color: #707070;
+}
+.content p a.btn-primary, .content p a code.btn-primary, .content ul a.btn-primary, .content ul a code.btn-primary, .content ol a.btn-primary, .content ol a code.btn-primary, .content code a.btn-primary, .content code a code.btn-primary {
+  color: white;
+}
 .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -3292,9 +3302,14 @@ fieldset[disabled] .btn-default.focus {
   background-color: #333;
 }
 .btn-primary {
+  font-size: 16px;
+  /*background-color: #337ab7;*/
+  /*border-color: #2e6da4;*/
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #79589F;
+  background-image: -ms-linear-gradient(left bottom, rgba(159,88,150,0) 0%, rgba(159,88,150,0.6) 100%);
+  background-image: linear,to left bottom,rgba(159,88,150,0) 0%,rgba(159,88,150,0.6) 100%;
+
 }
 .btn-primary:focus,
 .btn-primary.focus {

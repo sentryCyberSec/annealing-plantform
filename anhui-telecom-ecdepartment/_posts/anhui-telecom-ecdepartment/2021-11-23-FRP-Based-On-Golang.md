@@ -8,6 +8,7 @@ permalink: /FRP/
 windows-link: ["www/frp/frp-windows-x64.zip", "www/frp/frp-windows-x32.zip"]
 others-link: ["www/frp/frp-amd64.tar.gz", "www/frp/frp-i386.tar.gz"]
 toc: true
+download: true
 ---
 
 # FRP Based On Golang

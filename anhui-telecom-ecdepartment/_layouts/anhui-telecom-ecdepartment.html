@@ -63,6 +63,7 @@ layout: default
 
 					<div class="hline"></div>
 					<div class="spacing"></div>
+					{% if page.download == true %}
 					<div class="cli-download">
 						<div class="text-center">
 							<!-- /download-wrap start -->
@@ -94,6 +95,7 @@ layout: default
 							</div><!-- /download-wrap end -->
 						</div>
 					</div><!--/cli-download-->
+					{% endif %}
 					<h1>
 					<!--span class="post-print pull-right"><a href="javascript:window.print()"><ion-icon name="print-sharp" class="fa-1x"></ion-icon></a></span> -->
 					<span class="post-print pull-right"><a href="{{site.githubAccess}}/{{site.githubCodeRepos}}/edit/{{site.githubRepos-Branch}}/anhui-telecom-ecdepartment/{{page.path}}"><ion-icon name="create" class="fa-1x"></ion-icon></a></span>
