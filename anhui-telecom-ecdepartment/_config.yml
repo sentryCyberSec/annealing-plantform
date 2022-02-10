@@ -1,8 +1,8 @@
 ### GENERAL SETTINGS ###
 
 # Site settings
-title: 安徽银基安全 © 渗透测试规范审计平台
-brand: Ingeek co, Ltd  ANHUI HEFEI.
+title: © 渗透测试规范审计平台
+brand: Ingeek Co.,Ltd.  ANHUI HEFEI.
 description: 基于退火算法的渗透测试规范审计平台
 baseurl: "" #important: start with /
 url: "http://audit.isisy.com"

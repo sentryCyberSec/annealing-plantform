@@ -22,6 +22,9 @@ permalink: /DNSLog/
 
 <div class="content">
 <p>
-<a href="http://dnslog.cn" class="btn-primary btn" target="blank"><ion-icon name="log-out" class="fa-1x"></ion-icon>点击以跳转DNSLog平台</a>
+<a href="http://dnslog.cn" class="btn-primary btn" target="blank">
+点击以跳转DNSLog平台<span class="DocsMarkdown--link-external-icon">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16" role="img" aria-labelledby="title-9637423397128071" xmlns="http://www.w3.org/2000/svg"><title id="title-9637423397128071">External link icon</title><path d="M6.75,1.75h-5v12.5h12.5v-5m0,-4v-3.5h-3.5M8,8l5.5-5.5"></path></svg>
+</span></a>
 </p>
 </div>
