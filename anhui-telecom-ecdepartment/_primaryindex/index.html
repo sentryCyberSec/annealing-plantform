@@ -29,24 +29,26 @@ permalink: /
       </div>
        <div class="cws-banner cws-fullbleed" track-metadata-module="banner">
         <p class="cws-banner__body-copy">
-          <strong>Welcome! {{ site.project }}.</strong> 如下是新增、有关{% for about in site.categories['anhui-telecom-ecdepartment'] limit:3 %}
-          <a href="{{ about.url | prepend: about.baseurl }}">{% if about.desc%}{{ about.desc }}{%else%}{{about.Researchname}}{% endif %}</a>
+          <strong>Welcome! {{ site.project |upcase }}.</strong> 如下是新增、有关{% for about in site.categories['anhui-telecom-ecdepartment'] limit:3 %}
+          <a href="{{ about.url | prepend: about.baseurl }}">{% if about.desc%}{{ about.desc |upcase}}{%else%}{{about.Researchname |upcase}}{% endif %}</a>
           {% endfor %}的描述。
         </p>
       </div>
     </div>
   </devsite-header>
   <!--/container-->
-  <div class="container">
-
-     <div style="writing-mode: vertical-rl; font-family:STFangsong">
+  <div class="container" style="font-family:STFangsong">
+    <div style="writing-mode: vertical-rl; " class="pull-right">
       <p class="Poetry-text" >草木风声势未安，孤舟惶恐再经滩。</p>
       <p class="Poetry-text">地名末旦埋踪易，楫指中流转道难。</p>
       <p class="Poetry-text"><strong>天意似将颁大任，微躯何厌忍饥寒。</strong></p>
       <p class="Poetry-text">长歌正气重来读，我比前贤路已宽。</p>
       <p class="Poetry-text">&nbsp;&nbsp;&nbsp;&nbsp;————郁达夫 · 《乱离杂诗》</p>
     </div>
-
+    <div class="post-print">
+      <p class="Poetry-text">竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。</p>
+      <p class="Poetry-text">&nbsp;&nbsp;&nbsp;&nbsp;————苏轼 · 《定风波》</p>
+    </div>
   </div><!--/container -->
 </div><!--/service -->
 
