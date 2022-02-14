@@ -69,28 +69,35 @@ layout: default
 							<!-- /download-wrap start -->
 							<div class="download-wrap">
 								<div class="download-column cli-panel">
-									<div class="download-title"><ion-icon name="logo-apple"></ion-icon> Linux/macOS</div>
-									<h4>
-										<p>终端运行如下命令以下载:</p>
-									</h4>
-									{% for links in page.windows-link %}
-									<pre><code><span id="cli"><span class="token prompt" id="text1">$ </span>wget {{site.url}}/{{links}} --user={{site.project}} --password=[passwd]</span></code></pre>
-									{% endfor %}
-									<p></p>
-								</div>
-							</div>
-
-							<div class="download-wrap">
-								<div class="download-column cli-panel">
-									<div class="download-title"><ion-icon name="logo-windows"></ion-icon> Windows</div>
-									<h4>
-										<p>终端运行如下命令以下载:</p>
-									</h4>
-									{% for links in page.others-link %}
-									<pre><code><span><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/{{links}} -u "{{site.project}}:[passwd]"</span></code></pre>
-									{% endfor %}
-<!--									<p><sub><a href="https://snapcraft.io">Snap is available on other Linux OS’s as well</a>.-->
-<!--									</sub></p>-->
+									<div class="download-wrap">
+										<div class="download-column cli-panel">
+											<div class="download-title"><ion-icon name="document"></ion-icon> 配置.INI</div>
+											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/www/frp/{{site.project}}.ini -u "{{site.project}}:[passwd]"</span></code></pre>
+											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/www/frp/{{site.project}}.ini --user={{site.project}} --password=[passwd]</span></code></pre>
+										</div>
+									</div>
+									<hr>
+									<!--code source from github. couner style: visit https://github.githubassets.com/assets/behaviors-0dd92b6868c0b738cc199cc4fcfaea74.css:6-->
+									<details open><summary class="download-title pointer">Assets <span data-view-component="true" class="Counter">{{page.others-link.size |plus: page.windows-link.size}}</span></summary>
+										<div class="download-column cli-panel">
+											<div class="download-title"><ion-icon name="logo-windows"></ion-icon> Windows</div>
+											<h4>
+												<p>终端运行如下命令以下载:</p>
+											</h4>
+											{% for links in page.windows-link %}
+											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/www/frp/{{links}} -u "{{site.project}}:[passwd]"</span></code></pre>
+											{% endfor %}
+											<hr>
+											<div class="download-title"><ion-icon name="logo-tux"></ion-icon> Linux/<ion-icon name="logo-apple"></ion-icon> macOS</div>
+											<h4>
+												<p>终端运行如下命令以下载:</p>
+											</h4>
+											{% for links in page.others-link %}
+											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/www/frp/{{links}} --user={{site.project}} --password=[passwd]</span></code></pre>
+											{% endfor %}
+											<p></p>
+										</div>
+									</details>
 								</div>
 							</div><!-- /download-wrap end -->
 						</div>

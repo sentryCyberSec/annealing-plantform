@@ -645,7 +645,9 @@ body {
     --ifm-code-font-size: 95%;
     --docusaurus-announcement-bar-height: auto;
     --collapse-button-bg-color-dark: #2e333a;
-    --doc-sidebar-width: 300px
+    --doc-sidebar-width: 300px;
+    --color-neutral-muted: rgba(175,184,193,0.2);
+    --color-counter-border: rgba(0,0,0,0);
 }
 .DocsMarkdown--link-external-icon {
     display: inline-block;
@@ -658,4 +660,18 @@ body {
     opacity: .7;
     /*.link-external-icon: var(--ifm-navbar-search-input-icon);*/
     /*link-external-icon :url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16" role="img" aria-labelledby="title-9637423397128071" xmlns="http://www.w3.org/2000/svg"><title id="title-9637423397128071">External link icon</title><path d="M6.75,1.75h-5v12.5h12.5v-5m0,-4v-3.5h-3.5M8,8l5.5-5.5"></path></svg>');*/
+}
+.Counter {
+    display: inline-block;
+    min-width: 20px;
+    padding: 0 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #24292f;
+    text-align: center;
+    background-color: var(--color-neutral-muted);
+    border: 1px solid var(--color-counter-border);
+    border-radius: 2em;
+    margin-left: 4px !important;
 }
