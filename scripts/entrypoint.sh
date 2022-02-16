@@ -38,9 +38,8 @@ project=($(cat .github/workflows/deploy*.yml |grep "project:"| awk -F'"' '{print
 project_name_CountPort=10010
 for porject_name in "${!project[@]}"; do
 let project_name_CountPort++
-
-cat >>${project[$porject_name]}.ini<<EOF
 #cat << EOF
+cat >>${project[$porject_name]}.ini<<EOF
 [common]
 server_addr = $REMOTE_SERVER_IP
 server_port = 7000
@@ -55,8 +54,8 @@ plugin_user = ${project[$porject_name]}
 plugin_passwd = $_Pass_From_GUSP_Algo
 use_compression = true
 EOF
+mv ${project[$porject_name]}.ini ${project[$porject_name]}/${project[$porject_name]}.ini
 done
-mv ${project[$porject_name]}.ini ${project[$porject_name]}/
 }
 
 if [ "$#" -eq 0 ] ; then
