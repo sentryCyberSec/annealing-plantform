@@ -32,6 +32,7 @@ jobs:
             ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
       - name: install dependencies & build
         run: |
+          ./scripts/entrypoint.sh config {{secrets.REMOTE_SERVER_IP}}
           export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
           bundle install --path=/tmp/bundle --jobs=4 --retry=3
           commitString=$(git rev-parse HEAD)
