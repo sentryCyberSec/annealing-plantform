@@ -68,10 +68,10 @@ function _cache_BIN_byURL() {
       wget -q "$target_file_download_url"
     done
     echo "$download_url_ver"
-    mkdir -p /tmp/frp/"$download_url_ver"/
-    ls -la /tmp/frp/"$download_url_ver"/
-    mv frp_"$download_url_ver"* /tmp/frp/"$download_url_ver"/
-    ls -la /tmp/frp/"$download_url_ver"/
+    mkdir -p ./frp/"$download_url_ver"/
+    ls -la ./frp/
+    mv frp_"$download_url_ver"* ./frp/"$download_url_ver"/
+    ls -la ./frp/"$download_url_ver"/
     #https://github.com/fatedier/frp/releases/download/v0.39.1/
 }
 

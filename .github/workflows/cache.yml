@@ -26,18 +26,21 @@ jobs:
         env:
           CACHE_ID: 1
         with:
-          path: /tmp/frp
+          path: ./frp
           key: ${{ runner.os }}-frp-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/_posts/anhui-telecom-ecdepartment/2021-11-23-FRP-Based-On-Golang.md') }}
           restore-keys: |
             ${{ runner.os }}-frp-${{ env.CACHE_ID }}-
-      - name: check
-        run: |
-          ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
-          ls -la /tmp/frp
-          ls -la /tmp/frp/*
+#      - name: check
+#        run: |
+#          ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
+#          ls -la ./frp
+#          ls -la ./frp/${{ env.download_url_ver }}/
       - name: files download
         if: steps.cache.outputs.cache-hit != 'true'
-        run: ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
+        run: |
+          ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
+          ls -la ./frp
+          ls -la ./frp/${{ env.download_url_ver }}/
 
       # 上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
       - name: Push Bin Files
@@ -47,6 +50,6 @@ jobs:
           remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
           ssh_port: 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source_path: /tmp/frp/
+          source_path: ./frp/${{ env.download_url_ver }}/
           destination_path: ~/assets/frp/
           rsync_args: --exclude="./_site/Gemfile.lock"
