@@ -33,7 +33,8 @@ jobs:
       - name: check
         run: |
           ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
-          ls -la /tmp/frp*/*
+          ls -la /tmp/frp
+          ls -la /tmp/frp/*
       - name: files download
         if: steps.cache.outputs.cache-hit != 'true'
         run: ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
