@@ -1,7 +1,7 @@
-name: sentrylab harmony.
+name: cache
 
 on:
-   [workflow_dispatch]
+  [workflow_dispatch]
 
 
 env:
@@ -32,8 +32,8 @@ jobs:
             ${{ runner.os }}-frp-${{ env.CACHE_ID }}-
       - name: check
         run: |
-          ls -la /tmp/frp*/*
           ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
+          ls -la /tmp/frp*/*
       - name: files download
         if: steps.cache.outputs.cache-hit != 'true'
         run: ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
