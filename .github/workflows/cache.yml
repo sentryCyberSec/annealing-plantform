@@ -30,17 +30,12 @@ jobs:
           key: ${{ runner.os }}-frp-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/_posts/anhui-telecom-ecdepartment/2021-11-23-FRP-Based-On-Golang.md') }}
           restore-keys: |
             ${{ runner.os }}-frp-${{ env.CACHE_ID }}-
-#      - name: check
-#        run: |
-#          ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
-#          ls -la ./frp
-#          ls -la ./frp/${{ env.download_url_ver }}/
+
       - name: files download
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           ./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
-          ls -la ./frp
-          ls -la ./frp/${{ env.download_url_ver }}/
+
 
       # 上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
       - name: Push Bin Files
