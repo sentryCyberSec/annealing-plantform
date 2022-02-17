@@ -86,7 +86,7 @@ layout: default
 												<p>终端运行如下命令以下载:</p>
 											</h4>
 											{% for links in page.windows-link %}
-											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/assets/frp/{{links}}</span></code></pre>
+											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/static/frp/{{links}}</span></code></pre>
 											{% endfor %}
 											<hr>
 											<div class="download-title"><ion-icon name="logo-tux"></ion-icon> Linux/<ion-icon name="logo-apple"></ion-icon> macOS</div>
@@ -94,7 +94,7 @@ layout: default
 												<p>终端运行如下命令以下载:</p>
 											</h4>
 											{% for links in page.others-link %}
-											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/assets/frp/{{links}}</span></code></pre>
+											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/static/frp/{{links}}</span></code></pre>
 											{% endfor %}
 											<p></p>
 										</div>
