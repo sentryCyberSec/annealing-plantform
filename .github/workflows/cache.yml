@@ -27,7 +27,7 @@ jobs:
           CACHE_ID: 1
         with:
           path: ./frp
-          key: ${{ runner.os }}-frp-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/_posts/anhui-telecom-ecdepartment/2021-11-23-FRP-Based-On-Golang.md') }}
+          key: ${{ runner.os }}-frp-${{ env.CACHE_ID }}-bb8ccbf4ccb61230ef90b2c7f2894f90ba1cc0c4b8b2b75b674d37069d24ee2b
           restore-keys: |
             ${{ runner.os }}-frp-${{ env.CACHE_ID }}-
 
