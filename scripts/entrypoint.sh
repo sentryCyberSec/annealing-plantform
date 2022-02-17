@@ -58,6 +58,20 @@ mv ${project[$porject_name]}.ini ${project[$porject_name]}/${project[$porject_na
 done
 }
 
+function _cache_BIN_byURL() {
+    #version=0.39.1
+    target_file=$(grep "\bfrp_$download_url_ver" anhui-telecom-ecdepartment/_posts/anhui-telecom-ecdepartment/2021-11-23-FRP-Based-On-Golang.md |awk -F'"' '{for(i=1;i<=NF;i++)if(i%2==0) print $i}')
+    echo "$target_file" > target_file.list
+    cat target_file.list
+    sed "s/^/https:\/\/github.com\/fatedier\/frp\/releases\/download\/v$download_url_ver\/&/g" target_file.list > target_file_download_url.list
+    for target_file_download_url in `cat target_file_download_url.list`; do
+      wget $target_file_download_url
+    done
+    mkdir -p /tmp/frp/$download_url_ver
+    mv frp_$download_url_ver* /tmp/frp/$download_url_ver
+#https://github.com/fatedier/frp/releases/download/v0.39.1/
+}
+
 if [ "$#" -eq 0 ] ; then
    _usage_
    exit 0
@@ -76,7 +90,12 @@ case $1 in
        # ./scripts/entrypoint.sh password
        # to Generate StrongPassword
        ;;
-
+   cache )
+       download_url_ver=$2
+       _cache_BIN_byURL
+       #./scripts/entrypoint.sh cache ${{ env.download_url_ver }}
+       #https://github.com/fatedier/frp/releases/download/v0.39.1/
+       ;;
    help | -h | --help )
        _usage_
        ;;
