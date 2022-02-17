@@ -65,13 +65,14 @@ function _cache_BIN_byURL() {
     cat target_file.list
     sed "s/^/https:\/\/github.com\/fatedier\/frp\/releases\/download\/v$download_url_ver\/&/g" target_file.list > target_file_download_url.list
     for target_file_download_url in `cat target_file_download_url.list`; do
-      wget $target_file_download_url
+      wget -q "$target_file_download_url"
     done
-    mkdir -p /tmp/frp/$download_url_ver
-    ls -la /tmp/frp/$download_url_ver
-    mv frp_$download_url_ver* /tmp/frp/$download_url_ver
-    ls -la /tmp/frp/$download_url_ver
-#https://github.com/fatedier/frp/releases/download/v0.39.1/
+    echo "$download_url_ver"
+    mkdir -p /tmp/frp/"$download_url_ver"/
+    ls -la /tmp/frp/"$download_url_ver"/
+    mv frp_"$download_url_ver"* /tmp/frp/"$download_url_ver"/
+    ls -la /tmp/frp/"$download_url_ver"/
+    #https://github.com/fatedier/frp/releases/download/v0.39.1/
 }
 
 if [ "$#" -eq 0 ] ; then

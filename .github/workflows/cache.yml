@@ -47,6 +47,6 @@ jobs:
           remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
           ssh_port: 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source_path: /tmp/frp/${{ env.download_url_ver }}
-          destination_path: ~/assets/frp
-          rsync_args: --exclude="./${{ env.project }}/_site/Gemfile.lock"
+          source_path: /tmp/frp/
+          destination_path: ~/assets/frp/
+          rsync_args: --exclude="./_site/Gemfile.lock"
