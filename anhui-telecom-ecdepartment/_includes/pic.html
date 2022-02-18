@@ -9,9 +9,10 @@
   {%- endfor -%}
   {%- assign srcset = srcset | split: ", " | join: ", " -%}
   {% if theme == 1 %}
-  <img src="{{site.baseurl}}/assets/img/{{include.name}}.jpg" srcset="{{srcset}}" />
+  <img src="https://user-assets.sxlcdn.com/images/625555/FuxC8FFYd-yuzozBabiCn6ZNnI3A.png?imageMogr2/strip/auto-orient/thumbnail/150x25%3E/format/png"/>
+  {% comment %}<img src="{{site.baseurl}}/assets/img/{{include.name}}.jpg" srcset="{{srcset}}" />
   {% elsif srcset.size > 0 %}
-  <source srcset="{{srcset}}" media="(prefers-color-scheme: dark)" />
+  <source srcset="{{srcset}}" media="(prefers-color-scheme: dark)" />{% endcomment %}
   {% endif %}
 {%- endfor -%}
 </picture>
