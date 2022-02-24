@@ -1,0 +1,57 @@
+name: build-4 sync and reload.
+
+on:
+  push:
+    branches:
+      - main
+env:
+  project: "anhui-mobile-technology-project"
+  CACHE_ID: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      LSI: 'true'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - name: cache Ruby Bundler
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: /tmp/bundle
+          key: ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-${{ hashFiles('anhui-telecom-ecdepartment/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-${{ env.CACHE_ID }}-
+      - name: install dependencies & build
+        run: |
+          mkdir ${{ env.project }}
+          cp -R anhui-telecom-ecdepartment/* ${{ env.project }}
+          ./scripts/entrypoint.sh config ${{secrets.REMOTE_SERVER_IP}}
+          export work_dir="`pwd`/${{ env.project }}" && cd $work_dir
+          bundle install --path=/tmp/bundle --jobs=4 --retry=3
+          commitString=$(git rev-parse HEAD)
+          echo "commitString: $commitString" >> _config.yml
+          bundle config set --local path '/tmp/bundle'
+          sed -i "s/anhui-telecom-ecdepartment/${{ env.project }}/g"  `grep anhui-telecom-ecdepartment -rl .`
+          mv _posts/anhui-telecom-ecdepartment _posts/${{ env.project }}
+          mv _layouts/anhui-telecom-ecdepartment.html _layouts/${{ env.project }}.html
+          bundle exec jekyll build --trace
+      # 上传打包文件到远程服务器 visit https://shansan.top/2021/01/19/hexo-blog-synchronization-with-rsync/
+      - name: Push
+        uses: yeshan333/rsync-deploy-action@v1.0.0
+        with:
+          ssh_login_username: github
+          remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
+          ssh_port: 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source_path: ./${{ env.project }}/_site/*
+          destination_path: ~/www/${{ env.project }}/
+          rsync_args: --exclude="./${{ env.project }}/_site/Gemfile.lock"
