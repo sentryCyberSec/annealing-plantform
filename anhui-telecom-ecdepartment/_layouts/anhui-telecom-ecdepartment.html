@@ -22,7 +22,7 @@ layout: default
 			<div class="col-sm-3 hidden-xs">
 				<ul class="nav nav-pills nav-stacked" id="help-nav">
 					{% for RP in about_pages %}
-					<li{% if RP.Researchname == page.Researchname or RP.redirect_help_id == page.Researchname %} class="active"{%endif%} id="toc-{{RP.Researchname}}"><a href="{{RP.url}}"><code-index-css>{{RP.Researchname}}</code-index-css></a></li>
+					<li{% if RP.Researchname == page.Researchname or RP.redirect_help_id == page.Researchname %} class="active"{%endif%} id="{{RP.Researchname}}"><a href="{{RP.url}}"><code-index-css>{{RP.Researchname}}</code-index-css></a></li>
 					{% endfor %}
 				</ul>
 				<!--see /assets/js/sentryabout.js to top article index（书签）-->
@@ -63,47 +63,11 @@ layout: default
 
 					<div class="hline"></div>
 					<div class="spacing"></div>
-					{% if page.download == true %}
-					<div class="cli-download">
-						<div class="text-center">
-							<!-- /download-wrap start -->
-							<div class="download-wrap">
-								<div class="download-column cli-panel">
-									<div class="download-wrap">
-										<div class="download-column cli-panel">
-											<div class="download-title"><ion-icon name="document"></ion-icon> 配置.INI</div>
-											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/{{site.project}}.ini -u "{{site.project}}:[passwd]"</span></code></pre>
-											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/{{site.project}}.ini --user={{site.project}} --password=[passwd]</span></code></pre>
-											<p><sub><a href="https://github.com/sentryCyberSec/annealing-plantform/blob/main/.github/workflows/deploy.yml#L35" target="_blank">自动化同步会导致每次下载的配置文件密码不一样，请保管好相关配置文件。</a></sub></p>
-										</div>
-									</div>
-									<hr>
-									<!--code source from github. couner style: visit https://github.githubassets.com/assets/behaviors-0dd92b6868c0b738cc199cc4fcfaea74.css:6-->
-									<details open><summary class="download-title pointer">Assets <span data-view-component="true" class="Counter">{{page.others-link.size |plus: page.windows-link.size}}</span></summary>
-										<div class="download-column cli-panel">
-											<div class="download-title"><ion-icon name="logo-windows"></ion-icon> Windows</div>
-											<h4>
-												<p>终端运行如下命令以下载:</p>
-											</h4>
-											{% for links in page.windows-link %}
-											<pre><code><span><span class="token prompt">curl </span>-s -DownloadString {{site.url}}/static/frp/{{links}}</span></code></pre>
-											{% endfor %}
-											<hr>
-											<div class="download-title"><ion-icon name="logo-tux"></ion-icon> Linux/<ion-icon name="logo-apple"></ion-icon> macOS</div>
-											<h4>
-												<p>终端运行如下命令以下载:</p>
-											</h4>
-											{% for links in page.others-link %}
-											<pre><code><span><span class="token prompt">wget </span>{{site.url}}/static/frp/{{links}}</span></code></pre>
-											{% endfor %}
-											<p></p>
-										</div>
-									</details>
-								</div>
-							</div><!-- /download-wrap end -->
-						</div>
-					</div><!--/cli-download-->
+
+					{% if page.download %}
+					{% include cli-download.html %}
 					{% endif %}
+
 					<h1>
 					<!--span class="post-print pull-right"><a href="javascript:window.print()"><ion-icon name="print-sharp" class="fa-1x"></ion-icon></a></span> -->
 					<span class="post-print pull-right"><a href="{{site.githubAccess}}/{{site.githubCodeRepos}}/edit/{{site.githubRepos-Branch}}/anhui-telecom-ecdepartment/{{page.path}}"><ion-icon name="create" class="fa-1x"></ion-icon></a></span>

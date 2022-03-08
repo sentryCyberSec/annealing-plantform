@@ -1,0 +1,28 @@
+- name: <ion-icon name="logo-windows"></ion-icon> Windows
+  arch: Windows
+  meta: false
+  data:
+    - link: frp_0.39.1_windows_386.zip
+    - link: frp_0.39.1_windows_amd64.zip
+
+- name: <ion-icon name="logo-tux"></ion-icon> Linux
+  arch: Linux
+  meta: false
+  data:
+    - link: frp_0.39.1_freebsd_386.tar.gz
+    - link: frp_0.39.1_freebsd_amd64.tar.gz
+    - link: frp_0.39.1_linux_386.tar.gz
+    - link: frp_0.39.1_linux_amd64.tar.gz
+    - link: frp_0.39.1_linux_arm.tar.gz
+    - link: frp_0.39.1_linux_arm64.tar.gz
+    - link: frp_0.39.1_linux_mips.tar.gz
+    - link: frp_0.39.1_linux_mips64.tar.gz
+    - link: frp_0.39.1_linux_mips64le.tar.gz
+    - link: frp_0.39.1_linux_mipsle.tar.gz
+
+- name: <ion-icon name="logo-apple"></ion-icon> macOS
+  arch: macOS
+  meta: false
+  data:
+    - link: frp_0.39.1_darwin_amd64.tar.gz
+    - link: frp_0.39.1_darwin_arm64.tar.gz

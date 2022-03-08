@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+        .cont {
+            /*overflow: hidden;*/
+            display: none;
+        }
+        </style>
+    </head>
+{% comment %}单个arch links 大小计算TODO:
+    {% for a in links_data %}{{a.arch}}
+        {% for obj_links in a.data %}
+        {{obj_links.size }}
+        {% endfor %}
+    {% endfor %}
+    {% for node in links_data %}{{node.arch}}{% endfor %}TODO:找到对应的arch显示「下载对应[arch]系统二进制文件」
+{% endcomment %}
+{% assign links_data = site.data.[page.download] %}
+    <body>
+        <div class="cli-download">
+            <div class="">
+                <div class="download-wrap">
+                    <div class="download-column cli-panel">
+                        <div class="download-title">
+                            <section>Step 1. 下方选择下载文件架构与类型</section><hr>
+                            {% for node in links_data %}
+                                {% if node.meta == false and node.data %}
+                                {% capture archs %}{{ node.arch }}{% endcapture %}
+                                    <b class="btn-primary btn mr-1 color-border-accent-emphasis" href="javascript:;" data-cont="{{archs}}"> {{ node.name }}</b>
+                                {% endif %}
+                            {% endfor %}<p><sub><a href="" target="_blank">如何查看系统架构</a></sub></p>
+                            <hr>
+                            <details><summary class="download-title pointer">
+                                Step 2. 下载对应系统文件
+                                <span data-view-component="true" class="Counter">Click</span></summary>
+                            {% for node in links_data %}{% capture archs %}{{ node.arch }}{% endcapture %}
+                                {% if node.meta == false and node.data %}
+                                <section class="cont" id="{{node.arch}}">
+                                    <div class="download-column cli-panel">
+                                        {% for data in node.data %}{% if archs == 'Windows' %}
+                                            <pre><code><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/static/frp/{{data.link}}</code></pre>
+                                        {%else%}
+                                            <pre><code><span class="token prompt">$ </span>wget {{site.url}}/static/frp/{{data.link}}</code></pre>
+                                        {% endif %}
+                                        {% endfor %}{% if archs == 'Windows' %}<hr>
+                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/{{site.project}}.ini -u "{{site.project}}:[passwd]"</code></pre>
+                                        {% else %}
+                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">$ </span>wget {{site.url}}/{{site.project}}.ini --user={{site.project}} --password=[passwd]</span></code></pre>{%endif%}
+                                    </div>
+                                </section>
+                                {% endif %}
+                            {% endfor %}
+                            </details>
+                            <csmall>
+                                根据银基安全<em>《渗透测试管理规范实施细则》第四章，4.3小结</em>中：
+                                <h5>后渗透阶段中所要求配置文件密码应具有：<em>随机性、不可猜解性</em>的特点，故请保管好相关配置文件。</h5>
+                            </csmall>
+                            <section><hr>Step 3. 运行</section>
+                            <div class="download-column cli-panel">
+                                <pre><code><span class="token prompt"></span>./frpc -c {{site.project}}.ini</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

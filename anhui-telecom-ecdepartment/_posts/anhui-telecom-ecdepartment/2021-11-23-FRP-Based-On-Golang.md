@@ -5,10 +5,8 @@ wrench: 2022-01-19
 Researchname: FRP Based On Golang
 author: Bin4xin
 permalink: /FRP/
-windows-link: ["frp_0.39.1_windows_386.zip", "frp_0.39.1_windows_amd64.zip"]
-others-link: ["frp_0.39.1_freebsd_386.tar.gz", "frp_0.39.1_freebsd_amd64.tar.gz", "frp_0.39.1_linux_386.tar.gz", "frp_0.39.1_linux_amd64.tar.gz", "frp_0.39.1_linux_arm.tar.gz", "frp_0.39.1_linux_arm64.tar.gz", "frp_0.39.1_linux_mips.tar.gz", "frp_0.39.1_linux_mips64.tar.gz", "frp_0.39.1_linux_mips64le.tar.gz", "frp_0.39.1_linux_mipsle.tar.gz", "frp_0.39.1_darwin_amd64.tar.gz", "frp_0.39.1_darwin_arm64.tar.gz"]
 toc: true
-download: true
+download: frp
 ---
 
 # FRP Based On Golang
