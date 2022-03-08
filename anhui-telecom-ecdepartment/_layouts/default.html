@@ -36,7 +36,7 @@
         //避免复制内容时把按钮文字也复制进去。先临时置空
         btn.text("");
         //visit https://www.cnblogs.com/mymelody/p/5501860.html
-        var matchString=/\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
+        var matchString=/\？|\*|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\【|\】|\、|\^|\$|\!|\~|\`|\|/g;
         temp.text(pre.text().replace(matchString, ''));
         temp.appendTo(pre);
         temp.select();
