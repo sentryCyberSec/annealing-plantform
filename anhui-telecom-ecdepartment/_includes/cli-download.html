@@ -39,14 +39,15 @@
                                 <section class="cont" id="{{node.arch}}">
                                     <div class="download-column cli-panel">
                                         {% for data in node.data %}{% if archs == 'Windows' %}
-                                            <pre><code><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/static/frp/{{data.link}}</code></pre>
+                                            <pre><code><span class="token prompt">> </span>$pair = "{{site.project}}:[pass]";$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair);$base64 = [System.Convert]::ToBase64String($bytes);$basicAuthValue = "Basic $base64";$headers = @{ Authorization = $basicAuthValue };Invoke-WebRequest -uri "{{site.url}}/static/frp/{{data.link}}" -Headers $headers  -OutFile {{data.link}}</code></pre>
+                                        <!---->
                                         {%else%}
-                                            <pre><code><span class="token prompt">$ </span>wget {{site.url}}/static/frp/{{data.link}}</code></pre>
+                                        <pre><code><span class="token prompt">$ </span>wget {{site.url}}/static/frp/{{data.link}} --user={{site.project}} --password=[pass]</code></pre>
                                         {% endif %}
                                         {% endfor %}{% if archs == 'Windows' %}<hr>
-                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">> </span>curl -s -DownloadString {{site.url}}/{{site.project}}.ini -u "{{site.project}}:[passwd]"</code></pre>
+                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">> </span>$pair = "{{site.project}}:[pass]";$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair);$base64 = [System.Convert]::ToBase64String($bytes);$basicAuthValue = "Basic $base64";$headers = @{ Authorization = $basicAuthValue };Invoke-WebRequest -uri "{{site.url}}/{{site.project}}.ini" -Headers $headers  -OutFile {{site.project}}.ini</code></pre>
                                         {% else %}
-                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">$ </span>wget {{site.url}}/{{site.project}}.ini --user={{site.project}} --password=[passwd]</span></code></pre>{%endif%}
+                                        2.1. 配置文件下载<hr><pre><code><span class="token prompt">$ </span>wget {{site.url}}/{{site.project}}.ini --user={{site.project}} --password=[pass]</span></code></pre>{%endif%}
                                     </div>
                                 </section>
                                 {% endif %}
