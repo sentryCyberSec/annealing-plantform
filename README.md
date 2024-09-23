@@ -4,7 +4,7 @@
 
 渗透测试 | 规范审计 | 基于退火算法的渗透测试规范审计平台 © 安徽银基安全
 
-[![2022-02-16-4.21.17.png](https://image.yjs2635.xyz/images/2022/02/16/2022-02-16-4.21.17.png)](https://image.yjs2635.xyz/image/cRwz)
+[![2022-02-16-4.21.17.png](https://image.isisy.com/images/2022/02/16/2022-02-16-4.21.17.png)](https://image.yjs2635.xyz/image/cRwz)
 
 [comment]: <> (![sentrylab build sync and reload.]&#40;https://github.com/Bin4xin/bin4xin.github.io/workflows/sentrylab%20build%20sync%20and%20reload./badge.svg&#41;)
 
